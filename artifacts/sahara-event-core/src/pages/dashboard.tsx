@@ -101,9 +101,10 @@ export default function Dashboard() {
             <div className="flex-1 flex p-6 gap-6 items-center">
               {/* Map Placeholder */}
               <div className="w-1/2 h-full min-h-[200px] rounded-xl bg-[#1a1208] relative overflow-hidden flex items-center justify-center">
+                 <img src="/stadium.png" alt="Narendra Modi Stadium" className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen" />
                  <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/40 rounded-full blur-2xl"></div>
                  <div className="absolute bottom-1/3 right-1/3 w-24 h-24 bg-destructive/40 rounded-full blur-2xl"></div>
-                 <span className="text-white/30 font-mono text-sm tracking-widest">STADIUM MAP</span>
+                 <span className="text-white/80 font-mono text-sm tracking-widest z-10 font-bold bg-black/50 px-3 py-1 rounded">NARENDRA MODI STADIUM</span>
               </div>
               <div className="w-1/2 flex flex-col gap-4">
                 <div>

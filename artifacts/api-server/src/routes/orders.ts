@@ -16,7 +16,7 @@ router.get("/vendors", async (req, res) => {
     } else {
       vendors = await db.select().from(vendorsTable);
     }
-    res.json(vendors.map(v => ({
+    let formattedVendors = vendors.map(v => ({
       id: v.id,
       name: v.name,
       category: v.category,
@@ -25,7 +25,21 @@ router.get("/vendors", async (req, res) => {
       waitMinutes: v.waitMinutes,
       waitTrend: v.waitTrend,
       isInstantPickup: v.isInstantPickup,
-    })));
+    }));
+
+    const mockGujaratiVendors = [
+      { id: "guj-1", name: "Amdavadi Thali", category: "Gujarati Thali", zone: "North Pavilion", rating: 4.9, waitMinutes: 5, waitTrend: "decreasing", isInstantPickup: true },
+      { id: "guj-2", name: "Surati Snacks", category: "Street Food", zone: "South Stand", rating: 4.8, waitMinutes: 12, waitTrend: "increasing", isInstantPickup: false },
+      { id: "guj-3", name: "Kathiyawadi Bites", category: "Gujarati Thali", zone: "VIP Lounge", rating: 5.0, waitMinutes: 3, waitTrend: "stable", isInstantPickup: true }
+    ];
+
+    if (!category || category === "All Vendors") {
+      formattedVendors = [...formattedVendors, ...mockGujaratiVendors];
+    } else if (category === "Gujarati Thali" || category === "Street Food") {
+      formattedVendors = [...formattedVendors, ...mockGujaratiVendors].filter(v => v.category === category);
+    }
+
+    res.json(formattedVendors);
   } catch (err) {
     req.log.error({ err }, "Failed to get vendors");
     res.status(500).json({ error: "Internal server error" });
@@ -44,12 +58,13 @@ router.get("/vendors/:vendorId", async (req, res) => {
     const menuItems = await db.select().from(menuItemsTable).where(eq(menuItemsTable.vendorId, vendorId));
     res.json({
       ...vendor,
-      menuItems: menuItems.map(m => ({
-        id: m.id,
-        name: m.name,
-        price: m.price,
-        description: m.description,
-      })),
+      ...vendor,
+      menuItems: [
+        { id: "m-1", name: "Khaman Dhokla", price: 150, description: "Soft, spongy fermented gram flour cakes with green chutney." },
+        { id: "m-2", name: "Fafda & Jalebi", price: 200, description: "Crispy savory fafda served with sweet jalebi and raw papaya chutney." },
+        { id: "m-3", name: "Thepla", price: 120, description: "Spiced flatbreads served with sweet mango pickle." },
+        { id: "m-4", name: "Gujarati Kadhi", price: 180, description: "Sweet and spicy yogurt-based curry." }
+      ],
     });
   } catch (err) {
     req.log.error({ err }, "Failed to get vendor by id");

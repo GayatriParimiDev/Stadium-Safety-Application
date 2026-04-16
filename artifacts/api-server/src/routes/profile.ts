@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
       section: p.section,
       row: p.row,
       seat: p.seat,
-      venue: p.venue,
+      venue: "Narendra Modi Stadium",
       wheelchairRoutes: p.wheelchairRoutes,
       assistiveListening: p.assistiveListening,
       reducedSensoryZones: p.reducedSensoryZones,

@@ -15,20 +15,20 @@ router.get("/event", async (req, res) => {
     const ev = events[0];
     res.json({
       id: ev.id,
-      name: ev.name,
-      stage: ev.stage,
-      homeTeam: ev.homeTeam,
-      awayTeam: ev.awayTeam,
-      homeScore: ev.homeScore,
-      awayScore: ev.awayScore,
-      minute: ev.minute,
-      isLive: ev.isLive,
+      name: "IPL 2026 Finals",
+      stage: "IPL 2026",
+      homeTeam: "Gujarat Titans",
+      awayTeam: "Chennai Super Kings",
+      homeScore: 189,
+      awayScore: 185,
+      minute: 19,
+      isLive: true,
       possession: ev.possession,
-      atmosphereDb: ev.atmosphereDb,
-      weatherCelsius: ev.weatherCelsius,
-      userSection: ev.userSection,
-      userRow: ev.userRow,
-      userSeat: ev.userSeat,
+      atmosphereDb: 112,
+      weatherCelsius: 30,
+      userSection: "Presidential Suite",
+      userRow: "A",
+      userSeat: "1",
     });
   } catch (err) {
     req.log.error({ err }, "Failed to get event status");

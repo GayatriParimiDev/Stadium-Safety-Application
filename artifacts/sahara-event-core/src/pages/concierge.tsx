@@ -14,7 +14,7 @@ export default function Concierge() {
   const placeOrder = usePlaceOrder();
   const { toast } = useToast();
 
-  const categories = ["All Vendors", "Artisan Coffee", "Gourmet Deli", "Patisserie", "Fine Spirits"];
+  const categories = ["All Vendors", "Gujarati Thali", "Street Food", "Artisan Coffee", "Gourmet Deli", "Patisserie", "Fine Spirits"];
 
   const handleOrder = () => {
     if (!selectedVendor) return;
@@ -90,10 +90,11 @@ export default function Concierge() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
             {vendors?.map(vendor => (
               <div key={vendor.id} className="bg-card rounded-[1.5rem] border border-border overflow-hidden shadow-sm hover:shadow-md transition-shadow group flex flex-col">
-                <div className="h-40 w-full bg-gradient-to-br from-[#e08850] to-[#c2652a] relative overflow-hidden">
-                   {/* Abstract pattern placeholder */}
-                   <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white to-transparent"></div>
-                   <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-2 py-1 rounded text-white text-xs font-bold flex items-center gap-1">
+                <div className="h-40 w-full bg-[#1a1208] relative overflow-hidden">
+                   <img src="/food.png" alt="Gujarati Food" className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-luminosity brightness-110" />
+                   <div className="absolute inset-0 opacity-80 mix-blend-color bg-gradient-to-br from-[#e08850] to-[#c2652a]"></div>
+                   <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.2),_transparent)]"></div>
+                   <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-white text-xs font-bold flex items-center gap-1 border border-white/10 shadow-sm z-10">
                      ⭐ {vendor.rating}
                    </div>
                 </div>

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { SideNav } from "@/components/side-nav";
-import { useGetProfile, useUpdateProfile } from "@workspace/api-client-react";
+import { useGetProfile, useUpdateProfile, useGetOrders } from "@workspace/api-client-react";
 import { Switch } from "@/components/ui/switch";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Profile() {
   const { data: profile, refetch } = useGetProfile();
   const updateProfile = useUpdateProfile();
+  const { data: orders } = useGetOrders();
   const [isUpdating, setIsUpdating] = useState(false);
 
   const handleToggle = (key: keyof typeof updateProfile.variables) => {
@@ -193,6 +194,36 @@ export default function Profile() {
                     </button>
                   );
                 })}
+              </div>
+            </div>
+
+            <div className="bg-card rounded-[1.5rem] border border-border p-8 shadow-sm">
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <h3 className="font-serif text-xl font-medium mb-1">Order History</h3>
+                  <p className="text-sm text-secondary">Your recent stadium orders.</p>
+                </div>
+              </div>
+              
+              <div className="flex flex-col gap-4">
+                {orders && orders.length > 0 ? orders.map((order, i) => (
+                  <div key={i} className="p-4 bg-background border border-border rounded-xl flex items-center justify-between shadow-sm">
+                    <div className="flex flex-col">
+                       <span className="font-medium text-foreground">{order.vendorName || "Catering"}</span>
+                       <span className="text-xs text-secondary mt-1">Status: <span className="uppercase text-primary font-bold">{order.status}</span></span>
+                    </div>
+                    <div className="text-sm font-medium text-right text-foreground">
+                       {order.items?.length || 1} Item(s)
+                       <div className="text-xs text-secondary mt-1 font-normal opacity-80">
+                         {new Date(order.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                       </div>
+                    </div>
+                  </div>
+                )) : (
+                  <div className="text-center p-6 border-2 border-dashed border-border rounded-xl text-secondary text-sm">
+                    You haven't placed any orders yet.
+                  </div>
+                )}
               </div>
             </div>
           </div>
