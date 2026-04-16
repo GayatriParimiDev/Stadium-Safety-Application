@@ -19,7 +19,7 @@ The platform aims to completely remove friction from the matchday experience. By
 This project leverages a modern Monorepo architecture focusing heavily on full-stack Type-safety, beautiful user aesthetics, and blazing-fast local delivery. 
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=react,ts,vite,tailwind,nodejs,express,postgres,pnpm" alt="Tech Stack" />
+  <img src="https://skillicons.dev/icons?i=react,ts,vite,tailwind,nodejs,express,postgres,npm" alt="Tech Stack" />
 </div>
 
 * **Frontend Ecosystem:** React 19 with rigorous TypeScript typing.
@@ -30,12 +30,12 @@ This project leverages a modern Monorepo architecture focusing heavily on full-s
 * **Backend:** Express API instance running on Node.js.
 * **Database Management:** Drizzle ORM integrated tightly with PostgreSQL.
 * **Schema Validation:** Zod for bulletproof server-to-client type integrity.
-* **Package Manager:** PNPM Workspaces mapping local APIs seamlessly to the frontend.
+* **Package Manager:** NPM Workspaces mapping local APIs seamlessly to the frontend.
 
 ## 🛠️ Getting Started Locally
 
 ### Prerequisites
-Ensure you have `Node.js` (v20+) and `pnpm` currently installed.
+Ensure you have `Node.js` (v20+) currently installed.
 
 ### Installation & Run Steps
 
@@ -43,22 +43,16 @@ Ensure you have `Node.js` (v20+) and `pnpm` currently installed.
    ```bash
    git clone https://github.com/GayatriParimiDev/Stadium-Safety-Application.git
    cd Stadium-Safety-Application
-   pnpm install
+   npm install
    ```
 
-2. **Boot the Backend Services:**
-   Start the Node API mock server processing local data endpoints:
+2. **Launch the Platform:**
+   Start both the backend API server and frontend core simultaneously from the root directory:
    ```bash
-   pnpm --filter @workspace/api-server run dev
+   npm run dev
    ```
 
-3. **Launch the Frontend GUI:**
-   Spin up an additional terminal window and connect via Vite:
-   ```bash
-   pnpm --filter @workspace/sahara-event-core run dev
-   ```
-
-4. **Navigate to LocalHost:**
+3. **Navigate to LocalHost:**
    Load your terminal's output link (usually `http://localhost:5173`) to view the application in action. 
 
 ---
