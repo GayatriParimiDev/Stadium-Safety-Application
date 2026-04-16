@@ -3,13 +3,24 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Sahara Event Core API specification
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: dashboard
+    description: Dashboard and event status
+  - name: crowd
+    description: Crowd and queue intelligence
+  - name: orders
+    description: Food ordering and vendors
+  - name: notifications
+    description: Real-time alerts and notifications
+  - name: profile
+    description: User profile and preferences
+
 paths:
   /healthz:
     get:
@@ -24,6 +35,241 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /dashboard/event:
+    get:
+      operationId: getEventStatus
+      tags: [dashboard]
+      summary: Get live event status
+      responses:
+        "200":
+          description: Live event status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventStatus"
+
+  /dashboard/stats:
+    get:
+      operationId: getDashboardStats
+      tags: [dashboard]
+      summary: Get dashboard summary stats
+      responses:
+        "200":
+          description: Dashboard stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardStats"
+
+  /crowd/zones:
+    get:
+      operationId: getCrowdZones
+      tags: [crowd]
+      summary: Get crowd density for all zones
+      responses:
+        "200":
+          description: Zone crowd data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CrowdZone"
+
+  /crowd/gates:
+    get:
+      operationId: getGateStatus
+      tags: [crowd]
+      summary: Get entry gate status and wait times
+      responses:
+        "200":
+          description: Gate status list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GateStatus"
+
+  /crowd/amenities:
+    get:
+      operationId: getAmenityStatus
+      tags: [crowd]
+      summary: Get amenity capacity status
+      responses:
+        "200":
+          description: Amenity status list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AmenityStatus"
+
+  /crowd/forecast:
+    get:
+      operationId: getCongestionForecast
+      tags: [crowd]
+      summary: Get AI congestion forecast
+      responses:
+        "200":
+          description: Congestion forecast
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CongestionForecast"
+
+  /orders/vendors:
+    get:
+      operationId: getVendors
+      tags: [orders]
+      summary: Get all food vendors
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Vendor list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Vendor"
+
+  /orders/vendors/{vendorId}:
+    get:
+      operationId: getVendorById
+      tags: [orders]
+      summary: Get vendor details and menu
+      parameters:
+        - name: vendorId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Vendor with menu
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VendorDetail"
+
+  /orders/pickup-windows:
+    get:
+      operationId: getPickupWindows
+      tags: [orders]
+      summary: Get optimal pickup time windows
+      responses:
+        "200":
+          description: Pickup window data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PickupWindow"
+
+  /orders:
+    post:
+      operationId: placeOrder
+      tags: [orders]
+      summary: Place a food order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlaceOrderRequest"
+      responses:
+        "201":
+          description: Order placed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Order"
+    get:
+      operationId: getOrders
+      tags: [orders]
+      summary: Get current user orders
+      responses:
+        "200":
+          description: Order list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Order"
+
+  /notifications:
+    get:
+      operationId: getNotifications
+      tags: [notifications]
+      summary: Get all notifications
+      responses:
+        "200":
+          description: Notification list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Notification"
+
+  /notifications/{notificationId}/dismiss:
+    post:
+      operationId: dismissNotification
+      tags: [notifications]
+      summary: Dismiss a notification
+      parameters:
+        - name: notificationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Notification dismissed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Notification"
+
+  /profile:
+    get:
+      operationId: getProfile
+      tags: [profile]
+      summary: Get user profile
+      responses:
+        "200":
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
+    put:
+      operationId: updateProfile
+      tags: [profile]
+      summary: Update user profile preferences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProfileRequest"
+      responses:
+        "200":
+          description: Updated profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +280,395 @@ components:
       required:
         - status
 
+    EventStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        stage:
+          type: string
+        homeTeam:
+          type: string
+        awayTeam:
+          type: string
+        homeScore:
+          type: integer
+        awayScore:
+          type: integer
+        minute:
+          type: integer
+        isLive:
+          type: boolean
+        possession:
+          type: number
+        atmosphereDb:
+          type: number
+        weatherCelsius:
+          type: number
+        userSection:
+          type: string
+        userRow:
+          type: string
+        userSeat:
+          type: string
+      required:
+        - id
+        - name
+        - stage
+        - homeTeam
+        - awayTeam
+        - homeScore
+        - awayScore
+        - minute
+        - isLive
+        - possession
+        - atmosphereDb
+        - weatherCelsius
+        - userSection
+        - userRow
+        - userSeat
+
+    DashboardStats:
+      type: object
+      properties:
+        totalAttendance:
+          type: integer
+        attendanceChange:
+          type: number
+        avgGateEntryMinutes:
+          type: number
+        gateEntryStatus:
+          type: string
+        activeAlerts:
+          type: integer
+        alertImpact:
+          type: string
+        systemHealth:
+          type: number
+      required:
+        - totalAttendance
+        - attendanceChange
+        - avgGateEntryMinutes
+        - gateEntryStatus
+        - activeAlerts
+        - alertImpact
+        - systemHealth
+
+    CrowdZone:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        level:
+          type: string
+        density:
+          type: string
+          enum: [low, moderate, high, peak]
+        percentage:
+          type: integer
+      required:
+        - id
+        - name
+        - level
+        - density
+        - percentage
+
+    GateStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        location:
+          type: string
+        type:
+          type: string
+        waitMinutes:
+          type: integer
+        congestion:
+          type: string
+          enum: [smooth, moderate, critical]
+        passengersPerMin:
+          type: integer
+        fillPercent:
+          type: integer
+      required:
+        - id
+        - name
+        - location
+        - type
+        - waitMinutes
+        - congestion
+        - passengersPerMin
+        - fillPercent
+
+    AmenityStatus:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        location:
+          type: string
+        status:
+          type: string
+          enum: [vacant, moderate, at_capacity]
+      required:
+        - id
+        - name
+        - location
+        - status
+
+    CongestionForecast:
+      type: object
+      properties:
+        gate:
+          type: string
+        forecastText:
+          type: string
+        expectedIncreasePercent:
+          type: integer
+        expectedAtTime:
+          type: string
+        reason:
+          type: string
+        validatedBy:
+          type: string
+      required:
+        - gate
+        - forecastText
+        - expectedIncreasePercent
+        - expectedAtTime
+        - reason
+        - validatedBy
+
+    Vendor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        category:
+          type: string
+        zone:
+          type: string
+        rating:
+          type: number
+        waitMinutes:
+          type: integer
+        waitTrend:
+          type: string
+          enum: [decreasing, stable, increasing]
+        isInstantPickup:
+          type: boolean
+        imageUrl:
+          type: string
+      required:
+        - id
+        - name
+        - category
+        - zone
+        - rating
+        - waitMinutes
+        - waitTrend
+        - isInstantPickup
+
+    VendorDetail:
+      allOf:
+        - $ref: "#/components/schemas/Vendor"
+        - type: object
+          properties:
+            description:
+              type: string
+            menuItems:
+              type: array
+              items:
+                $ref: "#/components/schemas/MenuItem"
+          required:
+            - menuItems
+
+    MenuItem:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+        description:
+          type: string
+      required:
+        - id
+        - name
+        - price
+
+    PickupWindow:
+      type: object
+      properties:
+        timeLabel:
+          type: string
+        busynessLevel:
+          type: integer
+        isOptimal:
+          type: boolean
+      required:
+        - timeLabel
+        - busynessLevel
+        - isOptimal
+
+    PlaceOrderRequest:
+      type: object
+      properties:
+        vendorId:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              menuItemId:
+                type: string
+              quantity:
+                type: integer
+            required:
+              - menuItemId
+              - quantity
+        pickupTime:
+          type: string
+      required:
+        - vendorId
+        - items
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        vendorId:
+          type: string
+        vendorName:
+          type: string
+        items:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [pending, preparing, ready, collected]
+        pickupLocation:
+          type: string
+        estimatedMinutes:
+          type: integer
+        createdAt:
+          type: string
+      required:
+        - id
+        - vendorId
+        - vendorName
+        - items
+        - status
+        - pickupLocation
+        - estimatedMinutes
+        - createdAt
+
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        priority:
+          type: string
+          enum: [critical, high, medium, low]
+        title:
+          type: string
+        message:
+          type: string
+        timestamp:
+          type: string
+        isDismissed:
+          type: boolean
+        actionLabel:
+          type: string
+        actionRoute:
+          type: string
+      required:
+        - id
+        - priority
+        - title
+        - message
+        - timestamp
+        - isDismissed
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        guestId:
+          type: string
+        tier:
+          type: string
+        section:
+          type: string
+        row:
+          type: string
+        seat:
+          type: string
+        venue:
+          type: string
+        wheelchairRoutes:
+          type: boolean
+        assistiveListening:
+          type: boolean
+        reducedSensoryZones:
+          type: boolean
+        topicInterests:
+          type: array
+          items:
+            type: string
+        cateringPreferences:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - name
+        - guestId
+        - tier
+        - section
+        - row
+        - seat
+        - venue
+        - wheelchairRoutes
+        - assistiveListening
+        - reducedSensoryZones
+        - topicInterests
+        - cateringPreferences
+
+    UpdateProfileRequest:
+      type: object
+      properties:
+        wheelchairRoutes:
+          type: boolean
+        assistiveListening:
+          type: boolean
+        reducedSensoryZones:
+          type: boolean
+        topicInterests:
+          type: array
+          items:
+            type: string
+        cateringPreferences:
+          type: array
+          items:
+            type: string

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sahara Event Core - Personal Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#7a1a10",
+                        "surface-container-low": "#f6f0e8",
+                        "error-container": "#fce4e0",
+                        "outline": "#9a9088",
+                        "secondary": "#78706a",
+                        "surface": "#faf5ee",
+                        "on-surface-variant": "#605850",
+                        "surface-bright": "#faf5ee",
+                        "tertiary": "#8c3c3c",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#f0a878",
+                        "on-background": "#3a302a",
+                        "inverse-primary": "#f0a878",
+                        "tertiary-fixed-dim": "#e8a0a0",
+                        "on-secondary-fixed-variant": "#504840",
+                        "inverse-on-surface": "#faf5ee",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#d8d0c8",
+                        "surface-variant": "#ece6dc",
+                        "on-primary-container": "#fbe8d8",
+                        "surface-tint": "#c2652a",
+                        "on-tertiary-container": "#3a2020",
+                        "surface-container-highest": "#e6e0d6",
+                        "surface-container": "#f2ece4",
+                        "secondary-fixed": "#eae2da",
+                        "on-secondary-container": "#605850",
+                        "on-primary-fixed": "#401a08",
+                        "background": "#faf5ee",
+                        "on-tertiary-fixed": "#2e1515",
+                        "surface-container-high": "#ece6dc",
+                        "on-tertiary-fixed-variant": "#6e3030",
+                        "inverse-surface": "#3a302a",
+                        "secondary-fixed-dim": "#cec6be",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#eae2da",
+                        "primary-fixed": "#fbe8d8",
+                        "on-surface": "#3a302a",
+                        "surface-dim": "#dcd6cc",
+                        "on-secondary-fixed": "#2a2420",
+                        "tertiary-fixed": "#fce0e0",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#8a4518",
+                        "tertiary-container": "#d47070",
+                        "primary-container": "#e08850",
+                        "primary": "#c2652a",
+                        "error": "#c0392b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["EB Garamond", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#faf5ee]/80 backdrop-blur-md border-b border-[#d8d0c8]/60 shadow-[0_2px_16px_rgba(58,48,42,0.04)] flex justify-between items-center px-8 h-20">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-serif italic text-[#c2652a] font-headline">Sahara Event Core</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-label text-stone-500 hover:text-[#c2652a] transition-colors duration-300 cursor-pointer active:opacity-70" href="#">Schedule</a>
+<a class="font-label text-stone-500 hover:text-[#c2652a] transition-colors duration-300 cursor-pointer active:opacity-70" href="#">Map</a>
+<a class="font-label text-[#c2652a] border-b-2 border-[#c2652a] pb-1 cursor-pointer active:opacity-70" href="#">Profile</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-stone-500 cursor-pointer hover:text-[#c2652a]" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-stone-500 cursor-pointer hover:text-[#c2652a]" data-icon="map">map</span>
+<span class="material-symbols-outlined text-[#c2652a] cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+</nav>
+<!-- SideNavBar (Hidden on small screens, shown on medium+) -->
+<aside class="fixed left-0 top-20 h-[calc(100vh-80px)] w-64 border-r border-[#d8d0c8]/60 bg-[#faf5ee] hidden md:flex flex-col py-10 px-6">
+<div class="mb-10">
+<h2 class="font-serif text-3xl text-[#c2652a] mb-2">Sahara</h2>
+<p class="font-label font-medium text-[10px] uppercase tracking-[0.2em] text-secondary">Venue Intelligence</p>
+</div>
+<nav class="flex flex-col gap-2">
+<div class="flex items-center gap-3 py-3 text-stone-400 hover:bg-[#c2652a]/5 hover:text-[#c2652a] transition-all duration-200 cursor-pointer rounded-lg pl-2">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label text-xs uppercase tracking-widest font-medium">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 py-3 text-stone-400 hover:bg-[#c2652a]/5 hover:text-[#c2652a] transition-all duration-200 cursor-pointer rounded-lg pl-2">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="font-label text-xs uppercase tracking-widest font-medium">Venue Map</span>
+</div>
+<div class="flex items-center gap-3 py-3 text-stone-400 hover:bg-[#c2652a]/5 hover:text-[#c2652a] transition-all duration-200 cursor-pointer rounded-lg pl-2">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="font-label text-xs uppercase tracking-widest font-medium">Live Feed</span>
+</div>
+<div class="flex items-center gap-3 py-3 text-stone-400 hover:bg-[#c2652a]/5 hover:text-[#c2652a] transition-all duration-200 cursor-pointer rounded-lg pl-2">
+<span class="material-symbols-outlined" data-icon="room_service">room_service</span>
+<span class="font-label text-xs uppercase tracking-widest font-medium">Concierge</span>
+</div>
+<div class="flex items-center gap-3 py-3 text-[#c2652a] font-bold border-l-4 border-[#c2652a] pl-4 bg-[#c2652a]/5">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label text-xs uppercase tracking-widest font-medium">Profile</span>
+</div>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/30 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="professional portrait of a person with a friendly expression in warm indoor studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDhQ50zH5ufqHOJ3Y84sE23X5EPxa0GE0dVWCqto9Uz6LmWzFO47gtGw0C1KDAzFcgWzGqdevxJVYZKuxcjovbR5y_PvHgUdf5Pd5Us_r2wD-dcSg_MK09TrbFViZl_yIncL7GuBRHhgOzQTVN4d_hHjF0Lnsqj1i7MCJ-zVqXL4O0cevGIYi1oSfq9vMzQMN-fKKxAMgRZooDNsjLK4X3pg3uKV6sikOHkAb0YHdqYdC7pi4ccPV27tnwJR9oU-GqPyRWrzK8PfI"/>
+</div>
+<div>
+<p class="font-label text-xs font-bold text-on-surface">Julian Aris</p>
+<p class="font-label text-[10px] text-secondary">Premium Guest</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="mt-20 md:ml-64 p-8 md:p-12 max-w-7xl mx-auto w-full flex-grow">
+<header class="mb-12">
+<h1 class="font-headline text-5xl md:text-6xl text-on-surface mb-2">Welcome back, Julian.</h1>
+<p class="font-body text-secondary max-w-lg">Curate your event experience. Adjust your preferences for a seamless journey through the Sahara Arena.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Left Column: Identity & Access -->
+<div class="md:col-span-1 flex flex-col gap-8">
+<!-- Profile Card -->
+<div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/40 shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full overflow-hidden border-2 border-primary p-1 mb-6">
+<img alt="Profile" class="w-full h-full object-cover rounded-full" data-alt="close-up portrait of a man in his 30s with short hair and light stubble wearing a linen shirt in warm sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb_FjjTMhoC2SVHYetgRmY1ZfbgaMaCgmGHXgM5htXkeK0fxJB2sDwTErAnDqH6tJPz0ysmC4Keo-4Bnt_mL5iq71WIbRXaN9Ue1-RSUtgLQ-gGxZqlWbNGN6vuSmb2JsMDNf75H_WSLMKM0x_UDZPhOz02M2uR_XYpJwm3zXseJpjhMhFVOkPkSCzDscK3rsRzPruzLoz7rkw6gGK4J34KV2jhtBh8L96EhWDpIvQAFsjZyLHafH7fn7Cw2EDz4AQYqFRYQFzv88"/>
+</div>
+<h2 class="font-headline text-2xl text-on-surface">Julian Aris</h2>
+<p class="font-label text-xs uppercase tracking-widest text-secondary mt-1">Guest #SA-9920</p>
+<div class="mt-8 w-full flex flex-col gap-3">
+<button class="w-full bg-primary text-on-primary font-label font-semibold py-3 px-6 rounded-lg hover:brightness-110 transition-all flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+                                Edit Account
+                            </button>
+<button class="w-full border border-outline-variant text-on-surface font-label font-semibold py-3 px-6 rounded-lg hover:bg-surface-variant transition-all">
+                                Export Event Pass
+                            </button>
+</div>
+</div>
+</div>
+<!-- Accessibility Preferences -->
+<div class="bg-surface-container-highest rounded-xl p-8 border border-outline-variant/20">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="accessibility_new">accessibility_new</span>
+<h3 class="font-label font-bold text-on-surface uppercase tracking-wider text-sm">Accessibility</h3>
+</div>
+<div class="space-y-4">
+<label class="flex items-center justify-between group cursor-pointer">
+<span class="font-body text-on-surface-variant">Wheelchair Routes</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-stone-300 peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+<label class="flex items-center justify-between group cursor-pointer">
+<span class="font-body text-on-surface-variant">Assistive Listening</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-stone-300 peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+<label class="flex items-center justify-between group cursor-pointer">
+<span class="font-body text-on-surface-variant">Reduced Sensory Zones</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-stone-300 peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Middle & Right Columns: Interactive Preferences -->
+<div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Saved Seat/Location Card -->
+<div class="bg-surface-container-low rounded-xl md:col-span-2 overflow-hidden border border-outline-variant/40 flex flex-col md:flex-row">
+<div class="p-8 flex flex-col justify-center flex-1">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="event_seat">event_seat</span>
+<h3 class="font-label font-bold text-on-surface uppercase tracking-wider text-sm">Primary Location</h3>
+</div>
+<h4 class="font-headline text-3xl text-on-surface mb-2">Grand Ballroom West</h4>
+<p class="font-body text-on-surface-variant mb-6 italic">Section A, Row 4, Seat 12</p>
+<div class="flex gap-4">
+<button class="bg-tertiary text-on-tertiary font-label text-xs py-2 px-4 rounded hover:brightness-110 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="directions">directions</span>
+                                Get Directions
+                            </button>
+<button class="text-primary font-label text-xs font-bold hover:underline">Change Seat</button>
+</div>
+</div>
+<div class="h-64 md:h-auto md:w-1/2 bg-surface-variant relative overflow-hidden">
+<img alt="Venue" class="w-full h-full object-cover" data-alt="interior of a luxury event hall with warm ambient lighting and soft golden fabrics over empty seats" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUuJdWfTqmioMHhCbKNymoIXP00OzlvDcNVFLi8A6o4FPbwbpadtAiftP0TLMM2EV72NiuMLpzo2vrp7Qvd-i-JSslGWGp9zE07qdXMc0daVD75eBNi0wbyDZcGH-N-7Ssj7lBHP2jUem40KfDbapGzLB4pEqgHcgi9GPYko1v2QjGz48E2MAHAIR6Jwf9M_TUZMQUg5JGUBWZR-wqyE_L6LwKfEZ1TTLDsgI0RO3ISQLY5apfKiTOf67C3RwssF7mQL8WndCFUYQ"/>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-low to-transparent md:block hidden"></div>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="pin_drop">pin_drop</span>
+</div>
+</div>
+</div>
+<!-- Favorite Food Vendors -->
+<div class="bg-white rounded-xl p-8 border border-outline-variant/40 shadow-[0_2px_16px_rgba(58,48,42,0.04)] md:col-span-2">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="restaurant">restaurant</span>
+<h3 class="font-label font-bold text-on-surface uppercase tracking-wider text-sm">Catering Preferences</h3>
+</div>
+<span class="font-label text-xs text-secondary hover:text-primary cursor-pointer transition-colors">See all vendors</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+<!-- Vendor 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-video w-full rounded-lg overflow-hidden mb-3 relative">
+<img alt="Food" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="high-end gourmet BBQ spread on wooden board with warm smoke and moody lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBDbjS5I1_EZloEG71aligOws0izlJ8m1Bt4Q3dcP-iKbL7ELCAqSKGxrQDc4vgAJARXlEgFs14VpeWNboowhDNjTzuB8ak9jhGXNdfdgG0PKzTw59JenByutgrVViguhKcb5jjFBPsuAIGlA0kt2f7Z_9qyCVukQGvH1kj2J8v-UHsm4em70juOzpx3x_heZp58A9TSLYOvMfaSRtwMFJiLIVTv-HSOOf4v1GNz4pHZZmJlySYIhczlKUurBityCzm4zR5uuwiQs"/>
+<div class="absolute top-2 right-2">
+<span class="material-symbols-outlined text-tertiary fill-current" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<h5 class="font-headline text-xl text-on-surface">Ember &amp; Ash</h5>
+<p class="font-label text-xs text-secondary">Artisan Grilled Greens &amp; Proteins</p>
+</div>
+<!-- Vendor 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-video w-full rounded-lg overflow-hidden mb-3 relative">
+<img alt="Food" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="fresh mediterranean tapas platter with olives, sun-dried tomatoes, and warm pita bread" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBceyGhL0kErMvxtomNC1LhwJB7ndglFUIwvCgJNiAhDSf8zqua0AvWzo36nHYsVhyNgRdgPVlQd2LzfYl6nPexwIH6rK7qgTya2h_lvwPgdoT6-fpLyLlmtAFz5yxO-WKvNJxRHTSL3fTjRl0E3fQyQxGWmTo96aVEisjB30xCcOD2q6YDltJDQUbf_bmZ9NLzS6R-hl8hTQkSMD0Co02yZdaCMwCZ6cBDFgnBCHYj7Ur4ogJrsvzX2t0b3iGy5VVMp2H2bcnKXtM"/>
+<div class="absolute top-2 right-2">
+<span class="material-symbols-outlined text-tertiary fill-current" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<h5 class="font-headline text-xl text-on-surface">Linen &amp; Olive</h5>
+<p class="font-label text-xs text-secondary">Mediterranean Tapas</p>
+</div>
+<!-- Vendor 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-video w-full rounded-lg overflow-hidden mb-3 relative">
+<div class="w-full h-full bg-surface-container flex items-center justify-center border-2 border-dashed border-outline-variant rounded-lg">
+<span class="material-symbols-outlined text-outline text-4xl" data-icon="add_circle">add_circle</span>
+</div>
+</div>
+<h5 class="font-headline text-xl text-on-surface">Discover More</h5>
+<p class="font-label text-xs text-secondary">Browse available menus</p>
+</div>
+</div>
+</div>
+<!-- Interests/Tags -->
+<div class="bg-surface-container-low rounded-xl p-8 border border-outline-variant/40 md:col-span-2">
+<h3 class="font-label font-bold text-on-surface uppercase tracking-wider text-sm mb-6">Topic Interests</h3>
+<div class="flex flex-wrap gap-3">
+<span class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-label text-xs font-semibold">Sustainability</span>
+<span class="bg-white border border-outline-variant text-on-surface px-4 py-1.5 rounded-full font-label text-xs font-semibold hover:border-primary transition-colors cursor-pointer">Artificial Intelligence</span>
+<span class="bg-primary text-on-primary px-4 py-1.5 rounded-full font-label text-xs font-semibold">Ethical Design</span>
+<span class="bg-white border border-outline-variant text-on-surface px-4 py-1.5 rounded-full font-label text-xs font-semibold hover:border-primary transition-colors cursor-pointer">Urban Architecture</span>
+<span class="bg-white border border-outline-variant text-on-surface px-4 py-1.5 rounded-full font-label text-xs font-semibold hover:border-primary transition-colors cursor-pointer">Circular Economy</span>
+<span class="bg-white border border-outline-variant text-on-surface px-4 py-1.5 rounded-full font-label text-xs font-semibold hover:border-primary transition-colors cursor-pointer">+ Add Interest</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-[#d8d0c8]/60 bg-[#faf5ee] flex justify-between items-center px-10 py-6 mt-auto">
+<p class="font-label text-xs text-stone-400 uppercase tracking-tighter">© 2024 Sahara Event Systems. Sun-Baked Simplicity.</p>
+<div class="flex gap-8">
+<a class="font-label text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] underline transition-opacity duration-300" href="#">Support</a>
+<a class="font-label text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] underline transition-opacity duration-300" href="#">Privacy</a>
+<a class="font-label text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] underline transition-opacity duration-300" href="#">System Status</a>
+</div>
+</footer>
+<!-- Mobile Bottom NavBar (Hidden on medium+) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-[#faf5ee]/95 backdrop-blur-md border-t border-outline-variant/40 h-16 flex justify-around items-center px-4 z-50">
+<div class="flex flex-col items-center gap-1 text-stone-400">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-label font-bold">DASH</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-stone-400">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-[10px] font-label font-bold">MAP</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-[#c2652a]">
+<span class="material-symbols-outlined" data-icon="account_circle" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="text-[10px] font-label font-bold">PROFILE</span>
+</div>
+</nav>
+</body></html>

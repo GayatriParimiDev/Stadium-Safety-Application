@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#7a1a10",
+                    "surface-container-low": "#f6f0e8",
+                    "error-container": "#fce4e0",
+                    "outline": "#9a9088",
+                    "secondary": "#78706a",
+                    "surface": "#faf5ee",
+                    "on-surface-variant": "#605850",
+                    "surface-bright": "#faf5ee",
+                    "tertiary": "#8c3c3c",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#f0a878",
+                    "on-background": "#3a302a",
+                    "inverse-primary": "#f0a878",
+                    "tertiary-fixed-dim": "#e8a0a0",
+                    "on-secondary-fixed-variant": "#504840",
+                    "inverse-on-surface": "#faf5ee",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#d8d0c8",
+                    "surface-variant": "#ece6dc",
+                    "on-primary-container": "#fbe8d8",
+                    "surface-tint": "#c2652a",
+                    "on-tertiary-container": "#3a2020",
+                    "surface-container-highest": "#e6e0d6",
+                    "surface-container": "#f2ece4",
+                    "secondary-fixed": "#eae2da",
+                    "on-secondary-container": "#605850",
+                    "on-primary-fixed": "#401a08",
+                    "background": "#faf5ee",
+                    "on-tertiary-fixed": "#2e1515",
+                    "surface-container-high": "#ece6dc",
+                    "on-tertiary-fixed-variant": "#6e3030",
+                    "inverse-surface": "#3a302a",
+                    "secondary-fixed-dim": "#cec6be",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#eae2da",
+                    "primary-fixed": "#fbe8d8",
+                    "on-surface": "#3a302a",
+                    "surface-dim": "#dcd6cc",
+                    "on-secondary-fixed": "#2a2420",
+                    "tertiary-fixed": "#fce0e0",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#8a4518",
+                    "tertiary-container": "#d47070",
+                    "primary-container": "#e08850",
+                    "primary": "#c2652a",
+                    "error": "#c0392b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Eb Garamond"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(216, 208, 200, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary/20">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#faf5ee]/80 dark:bg-stone-900/80 backdrop-blur-md border-b border-[#d8d0c8]/60 dark:border-stone-700/40 shadow-[0_2px_16px_rgba(58,48,42,0.04)] h-20 flex justify-between items-center px-8">
+<div class="flex items-center gap-8">
+<span class="font-serif italic text-2xl text-[#c2652a] dark:text-[#c2652a]">Sahara Event Core</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-[#c2652a] border-b-2 border-[#c2652a] pb-1 cursor-pointer transition-colors duration-300 font-medium text-sm uppercase tracking-widest">Dashboard</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#c2652a] transition-colors duration-300 cursor-pointer text-sm uppercase tracking-widest">Venue Map</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-[#c2652a] transition-colors duration-300 cursor-pointer text-sm uppercase tracking-widest">Schedule</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-tertiary rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">map</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">account_circle</span>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="pt-28 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="font-headline text-5xl md:text-6xl text-on-background tracking-tight mb-2">Welcome back, Arthur.</h1>
+<p class="text-on-surface-variant font-light tracking-wide max-w-2xl">Your personalized venue intelligence dashboard. Live updates from Section A-12.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Live Match/Event Status (Featured Card) -->
+<section class="md:col-span-8 glass-card rounded-3xl p-8 relative overflow-hidden flex flex-col justify-between min-h-[400px]">
+<div class="absolute top-0 right-0 p-6">
+<span class="bg-primary/10 text-primary px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+<span class="w-2 h-2 bg-primary rounded-full animate-pulse"></span> Live Now
+                    </span>
+</div>
+<div class="z-10">
+<p class="text-sm font-semibold uppercase tracking-widest text-secondary mb-4">Quarter Finals • Arena 1</p>
+<div class="flex items-center justify-between max-w-md">
+<div class="text-center">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center mb-3 shadow-sm border border-outline-variant">
+<span class="material-symbols-outlined text-4xl text-primary">sports_soccer</span>
+</div>
+<p class="font-headline text-xl">Lions FC</p>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-headline text-6xl text-on-background tracking-tighter">2 — 1</span>
+<span class="text-sm text-secondary font-medium mt-2">64' Played</span>
+</div>
+<div class="text-center">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center mb-3 shadow-sm border border-outline-variant">
+<span class="material-symbols-outlined text-4xl text-secondary">shield</span>
+</div>
+<p class="font-headline text-xl">Hawks SC</p>
+</div>
+</div>
+</div>
+<div class="mt-8 z-10 flex gap-4 overflow-x-auto pb-2">
+<div class="bg-surface/60 backdrop-blur-sm p-4 rounded-2xl border border-outline-variant min-w-[140px]">
+<p class="text-[10px] uppercase tracking-tighter text-secondary mb-1">Possession</p>
+<p class="font-headline text-2xl">54%</p>
+</div>
+<div class="bg-surface/60 backdrop-blur-sm p-4 rounded-2xl border border-outline-variant min-w-[140px]">
+<p class="text-[10px] uppercase tracking-tighter text-secondary mb-1">Atmosphere</p>
+<p class="font-headline text-2xl">92dB</p>
+</div>
+<div class="bg-surface/60 backdrop-blur-sm p-4 rounded-2xl border border-outline-variant min-w-[140px]">
+<p class="text-[10px] uppercase tracking-tighter text-secondary mb-1">Weather</p>
+<p class="font-headline text-2xl">24°C</p>
+</div>
+</div>
+<!-- Abstract background pattern -->
+<div class="absolute -bottom-20 -right-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
+</section>
+<!-- Alerts Sidebar -->
+<aside class="md:col-span-4 flex flex-col gap-6">
+<div class="bg-surface-container-high rounded-3xl p-6 border border-outline-variant/40">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline text-2xl">Real-time Alerts</h3>
+<span class="material-symbols-outlined text-tertiary">emergency_home</span>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4 p-4 rounded-2xl bg-on-error-container/5 border-l-4 border-error">
+<span class="material-symbols-outlined text-error mt-0.5">warning</span>
+<div>
+<p class="text-sm font-bold text-on-background">Gate 3 crowded</p>
+<p class="text-xs text-on-surface-variant mt-1">Expected wait time: 15 mins. Use Gate 5 for faster entry.</p>
+</div>
+</div>
+<div class="flex gap-4 p-4 rounded-2xl bg-primary/5 border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary mt-0.5">info</span>
+<div>
+<p class="text-sm font-bold text-on-background">Order Ready</p>
+<p class="text-xs text-on-surface-variant mt-1">Your 'Artisan Burger' is ready for pickup at Stand 12.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-3xl p-6 border border-outline-variant/40 relative overflow-hidden group cursor-pointer transition-transform hover:scale-[1.02]">
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline text-xl">Find My Seat</h3>
+<span class="material-symbols-outlined text-primary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<p class="text-xs text-secondary font-medium uppercase tracking-widest">Section A-12 • Row 4 • Seat 22</p>
+</div>
+</aside>
+<!-- Heatmap Widget -->
+<section class="md:col-span-7 bg-surface-container-lowest rounded-3xl p-8 border border-outline-variant/40 min-h-[350px] relative">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="font-headline text-3xl mb-1">Crowd Density</h3>
+<p class="text-sm text-secondary">Real-time venue thermal mapping</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest border border-primary text-primary rounded-full bg-primary/5">Level 1</button>
+<button class="px-3 py-1 text-[10px] font-bold uppercase tracking-widest border border-outline-variant text-secondary rounded-full hover:bg-surface-container transition-colors">Level 2</button>
+</div>
+</div>
+<div class="w-full h-48 rounded-2xl relative overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover opacity-80" data-alt="Abstract aerial schematic of a stadium interior with translucent orange and red overlays indicating high traffic density areas" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDp2aAdm_1kp789XCH_raFo0WaXfzYX3svwNWcSfptuSarxyN2Ji1G928o5K7KoLiPKlNhgXagTbRszlhHgmw_fXlAHflRrkbDgcd46cIaLSXYH87vSo92JOttQIJJYQmwsvbInkhiDLV3P2p45ENTyIfWd2-pbb1m2qoxVMpfVFh_g8eviTCFpmyaERDRiR4-so2JQp-8ZSEjXydLmWU5IIqGHeSXF09wgoBZ8CjNm7h_rX0l57Yf3-yeizKrBHahS-kNVC51GOSw"/>
+<!-- Mock heat spots -->
+<div class="absolute top-1/2 left-1/3 w-20 h-20 bg-primary/40 blur-2xl rounded-full"></div>
+<div class="absolute top-1/4 right-1/4 w-12 h-12 bg-tertiary/30 blur-xl rounded-full"></div>
+<div class="absolute bottom-1/4 left-1/2 w-16 h-16 bg-primary/20 blur-xl rounded-full"></div>
+</div>
+<div class="mt-6 grid grid-cols-3 gap-4">
+<div class="text-center">
+<p class="text-[10px] uppercase tracking-tighter text-secondary mb-1">Fan Zone</p>
+<div class="h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-4/5"></div>
+</div>
+<p class="text-xs font-bold mt-1">High</p>
+</div>
+<div class="text-center">
+<p class="text-[10px] uppercase tracking-tighter text-secondary mb-1">Concourse B</p>
+<div class="h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/4"></div>
+</div>
+<p class="text-xs font-bold mt-1">Low</p>
+</div>
+<div class="text-center">
+<p class="text-[10px] uppercase tracking-tighter text-secondary mb-1">Food Court</p>
+<div class="h-1 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-3/4"></div>
+</div>
+<p class="text-xs font-bold mt-1">Peak</p>
+</div>
+</div>
+</section>
+<!-- Quick Actions Bento -->
+<section class="md:col-span-5 grid grid-cols-2 gap-4">
+<button class="bg-[#c2652a] text-white rounded-3xl p-6 flex flex-col justify-between items-start transition-all hover:opacity-90 active:scale-95 shadow-lg shadow-primary/20 group">
+<span class="material-symbols-outlined text-3xl mb-4 group-hover:rotate-12 transition-transform">restaurant</span>
+<span class="font-headline text-xl leading-tight">Order<br/>Food</span>
+</button>
+<button class="bg-surface-container-highest text-on-surface rounded-3xl p-6 flex flex-col justify-between items-start transition-all hover:bg-surface-variant active:scale-95 border border-outline-variant group">
+<span class="material-symbols-outlined text-3xl text-primary mb-4">directions_run</span>
+<span class="font-headline text-xl leading-tight">Shortest<br/>Exit Route</span>
+</button>
+<button class="bg-surface-container-highest text-on-surface rounded-3xl p-6 flex flex-col justify-between items-start transition-all hover:bg-surface-variant active:scale-95 border border-outline-variant group">
+<span class="material-symbols-outlined text-3xl text-secondary mb-4">local_parking</span>
+<span class="font-headline text-xl leading-tight">My<br/>Parking</span>
+</button>
+<button class="bg-surface-container-highest text-on-surface rounded-3xl p-6 flex flex-col justify-between items-start transition-all hover:bg-surface-variant active:scale-95 border border-outline-variant group">
+<span class="material-symbols-outlined text-3xl text-tertiary mb-4">room_service</span>
+<span class="font-headline text-xl leading-tight">Call<br/>Concierge</span>
+</button>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-[#d8d0c8]/60 dark:border-stone-800 bg-[#faf5ee] dark:bg-stone-950 flex justify-between items-center px-10 py-6 w-full mt-auto">
+<p class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter">© 2024 Sahara Event Systems. Sun-Baked Simplicity.</p>
+<div class="flex gap-6">
+<a class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] transition-opacity duration-300 underline" href="#">Support</a>
+<a class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] transition-opacity duration-300 underline" href="#">Privacy</a>
+<a class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] transition-opacity duration-300 underline" href="#">System Status</a>
+</div>
+</footer>
+<!-- FAB (Suppressed based on logic for Dashboard, but shown here as it is primary context for 'Help' or 'Action') -->
+<div class="fixed bottom-8 right-8">
+<button class="w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110 active:scale-95">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</button>
+</div>
+</body></html>

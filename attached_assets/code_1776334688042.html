@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sahara Event Core | Crowd &amp; Queue Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#7a1a10",
+                    "surface-container-low": "#f6f0e8",
+                    "error-container": "#fce4e0",
+                    "outline": "#9a9088",
+                    "secondary": "#78706a",
+                    "surface": "#faf5ee",
+                    "on-surface-variant": "#605850",
+                    "surface-bright": "#faf5ee",
+                    "tertiary": "#8c3c3c",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#f0a878",
+                    "on-background": "#3a302a",
+                    "inverse-primary": "#f0a878",
+                    "tertiary-fixed-dim": "#e8a0a0",
+                    "on-secondary-fixed-variant": "#504840",
+                    "inverse-on-surface": "#faf5ee",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#d8d0c8",
+                    "surface-variant": "#ece6dc",
+                    "on-primary-container": "#fbe8d8",
+                    "surface-tint": "#c2652a",
+                    "on-tertiary-container": "#3a2020",
+                    "surface-container-highest": "#e6e0d6",
+                    "surface-container": "#f2ece4",
+                    "secondary-fixed": "#eae2da",
+                    "on-secondary-container": "#605850",
+                    "on-primary-fixed": "#401a08",
+                    "background": "#faf5ee",
+                    "on-tertiary-fixed": "#2e1515",
+                    "surface-container-high": "#ece6dc",
+                    "on-tertiary-fixed-variant": "#6e3030",
+                    "inverse-surface": "#3a302a",
+                    "secondary-fixed-dim": "#cec6be",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#eae2da",
+                    "primary-fixed": "#fbe8d8",
+                    "on-surface": "#3a302a",
+                    "surface-dim": "#dcd6cc",
+                    "on-secondary-fixed": "#2a2420",
+                    "tertiary-fixed": "#fce0e0",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#8a4518",
+                    "tertiary-container": "#d47070",
+                    "primary-container": "#e08850",
+                    "primary": "#c2652a",
+                    "error": "#c0392b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["EB Garamond"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        font-family: 'Manrope', sans-serif;
+      }
+      h1, h2, h3 {
+        font-family: 'EB Garamond', serif;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar Component -->
+<aside class="fixed left-0 h-full w-64 border-r border-[#d8d0c8]/60 bg-[#faf5ee] z-40 hidden md:flex flex-col py-10 transition-all duration-200 ease-in-out">
+<div class="px-8 mb-12">
+<span class="font-serif text-3xl text-[#c2652a]">Sahara</span>
+<p class="font-['Manrope'] font-medium text-[10px] uppercase tracking-widest text-stone-400 mt-1">Venue Intelligence</p>
+</div>
+<nav class="flex-grow">
+<ul class="space-y-4">
+<li class="group cursor-pointer">
+<div class="flex items-center text-stone-400 pl-5 hover:bg-[#c2652a]/5 hover:text-[#c2652a] py-2 transition-all duration-200">
+<span class="material-symbols-outlined mr-4" data-icon="dashboard">dashboard</span>
+<span class="font-['Manrope'] font-medium text-sm uppercase tracking-widest">Dashboard</span>
+</div>
+</li>
+<li class="group cursor-pointer">
+<div class="flex items-center text-stone-400 pl-5 hover:bg-[#c2652a]/5 hover:text-[#c2652a] py-2 transition-all duration-200">
+<span class="material-symbols-outlined mr-4" data-icon="explore">explore</span>
+<span class="font-['Manrope'] font-medium text-sm uppercase tracking-widest">Venue Map</span>
+</div>
+</li>
+<li class="group cursor-pointer">
+<div class="flex items-center text-[#c2652a] font-bold border-l-4 border-[#c2652a] pl-4 py-2 bg-[#c2652a]/5">
+<span class="material-symbols-outlined mr-4" data-icon="sensors">sensors</span>
+<span class="font-['Manrope'] font-medium text-sm uppercase tracking-widest">Live Feed</span>
+</div>
+</li>
+<li class="group cursor-pointer">
+<div class="flex items-center text-stone-400 pl-5 hover:bg-[#c2652a]/5 hover:text-[#c2652a] py-2 transition-all duration-200">
+<span class="material-symbols-outlined mr-4" data-icon="room_service">room_service</span>
+<span class="font-['Manrope'] font-medium text-sm uppercase tracking-widest">Concierge</span>
+</div>
+</li>
+<li class="group cursor-pointer">
+<div class="flex items-center text-stone-400 pl-5 hover:bg-[#c2652a]/5 hover:text-[#c2652a] py-2 transition-all duration-200">
+<span class="material-symbols-outlined mr-4" data-icon="leaderboard">leaderboard</span>
+<span class="font-['Manrope'] font-medium text-sm uppercase tracking-widest">Analytics</span>
+</div>
+</li>
+</ul>
+</nav>
+<div class="px-8 mt-auto border-t border-[#d8d0c8]/30 pt-8">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 bg-surface-container rounded-full overflow-hidden border border-[#d8d0c8]">
+<img class="w-full h-full object-cover" data-alt="close-up of a professional event manager in a neutral studio setting, soft warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXWD8QV0OO3AmpvI9r2wJ7iBJmROuRjxFwNtzVZgezWyPi7d7XxcmSbScmUAO3vbcwGZ5xMoKfK3Vdp7EVg5B5iAKUtpHEvj_ZtLSHUhal5DMkruPKdAxbkrzS3SG6u1rhP4szYH3uqWIrR4wffDYfRcMmo-Om-YJlO51kf4kr89HPxX9Sg68HFchTV4EwWAcs70SHgtWC9N3A_aPqcE0S9PdHCyleH0F39-o8heBtnbMFTif8hLBoP6_IPg7htAbV7qjx56QnQx8"/>
+</div>
+<div>
+<p class="text-xs font-bold text-on-surface">Alex Rivera</p>
+<p class="text-[10px] text-stone-400">Head Monitor</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Component -->
+<header class="fixed top-0 w-full z-30 bg-[#faf5ee]/80 backdrop-blur-md border-b border-[#d8d0c8]/60 shadow-[0_2px_16px_rgba(58,48,42,0.04)] h-20 flex justify-between items-center px-8 md:pl-72">
+<div class="flex items-center space-x-8">
+<h1 class="font-['EB_Garamond'] text-2xl tracking-tight text-[#c2652a]">Live Crowd Intelligence</h1>
+<div class="hidden md:flex items-center bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/30">
+<span class="material-symbols-outlined text-outline text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm font-body px-2 w-48 text-on-surface placeholder-outline" placeholder="Locate zone or gate..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-6 text-stone-500">
+<div class="relative cursor-pointer active:opacity-70">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
+</div>
+<span class="material-symbols-outlined cursor-pointer active:opacity-70" data-icon="map">map</span>
+<span class="material-symbols-outlined cursor-pointer active:opacity-70" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="md:pl-64 pt-20 pb-12 min-h-screen">
+<div class="max-w-[1400px] mx-auto p-8">
+<!-- Global Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_2px_16px_rgba(58,48,42,0.04)] border border-outline-variant/40">
+<p class="text-stone-400 text-xs font-bold uppercase tracking-widest mb-1">Total Attendance</p>
+<div class="flex items-end justify-between">
+<h2 class="text-4xl font-headline text-on-surface">12,482</h2>
+<span class="text-xs text-green-600 bg-green-50 px-2 py-1 rounded-full border border-green-100 flex items-center">
+<span class="material-symbols-outlined text-xs mr-1" data-icon="trending_up">trending_up</span> 14%
+                        </span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_2px_16px_rgba(58,48,42,0.04)] border border-outline-variant/40">
+<p class="text-stone-400 text-xs font-bold uppercase tracking-widest mb-1">Avg. Gate Entry</p>
+<div class="flex items-end justify-between">
+<h2 class="text-4xl font-headline text-on-surface">4.2m</h2>
+<span class="text-xs text-primary font-bold">OPTIMAL</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_2px_16px_rgba(58,48,42,0.04)] border border-outline-variant/40">
+<p class="text-stone-400 text-xs font-bold uppercase tracking-widest mb-1">Active Alerts</p>
+<div class="flex items-end justify-between">
+<h2 class="text-4xl font-headline text-tertiary">03</h2>
+<span class="text-xs text-tertiary font-bold">IMPACT HIGH</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-[0_2px_16px_rgba(58,48,42,0.04)] border border-outline-variant/40">
+<p class="text-stone-400 text-xs font-bold uppercase tracking-widest mb-1">System Health</p>
+<div class="flex items-end justify-between">
+<h2 class="text-4xl font-headline text-on-surface">99.8%</h2>
+<span class="w-2 h-2 rounded-full bg-green-500 mb-2"></span>
+</div>
+</div>
+</div>
+<!-- Bento Grid - Queue Analysis -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Main Visual Tracker: Entry Gates -->
+<div class="md:col-span-8 bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/40 shadow-sm">
+<div class="flex justify-between items-center mb-10">
+<h3 class="text-2xl">Entry Gate Intelligence</h3>
+<div class="flex space-x-2">
+<span class="px-3 py-1 bg-surface-variant text-[10px] rounded-full uppercase tracking-widest text-on-surface-variant">Live Analytics</span>
+<span class="px-3 py-1 bg-primary/10 text-[10px] rounded-full uppercase tracking-widest text-primary font-bold">Auto-Scale ON</span>
+</div>
+</div>
+<div class="space-y-12">
+<!-- Gate 01 -->
+<div class="relative">
+<div class="flex justify-between items-center mb-4">
+<div>
+<span class="text-stone-400 text-[10px] uppercase tracking-widest font-bold">Gate 01 • North Plaza</span>
+<p class="text-sm font-semibold">VIP &amp; Staff Passage</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-headline text-green-600">02m <small class="text-xs font-body text-stone-400">WAIT</small></p>
+</div>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-green-500/80 w-[15%]"></div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] text-stone-400 uppercase tracking-tighter">
+<span>Smooth Flow</span>
+<span>12 Passengers/Min</span>
+</div>
+</div>
+<!-- Gate 02 -->
+<div class="relative">
+<div class="flex justify-between items-center mb-4">
+<div>
+<span class="text-stone-400 text-[10px] uppercase tracking-widest font-bold">Gate 02 • Main Terminal</span>
+<p class="text-sm font-semibold">Standard Entry (East)</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-headline text-[#c2652a]">12m <small class="text-xs font-body text-stone-400">WAIT</small></p>
+</div>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-[#c2652a]/80 w-[65%]"></div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] text-stone-400 uppercase tracking-tighter">
+<span>Moderate Buildup</span>
+<span>45 Passengers/Min</span>
+</div>
+</div>
+<!-- Gate 03 -->
+<div class="relative">
+<div class="flex justify-between items-center mb-4">
+<div>
+<span class="text-stone-400 text-[10px] uppercase tracking-widest font-bold">Gate 03 • South Corridor</span>
+<p class="text-sm font-semibold">Standard Entry (West)</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-headline text-tertiary">28m <small class="text-xs font-body text-stone-400">WAIT</small></p>
+</div>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-tertiary/80 w-[92%]"></div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] text-stone-400 uppercase tracking-tighter">
+<span>Critical Congestion</span>
+<span>88 Passengers/Min</span>
+</div>
+</div>
+</div>
+<div class="mt-12 bg-surface-container-low p-4 rounded-lg flex items-center justify-between border border-[#d8d0c8]/40">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-primary" data-icon="lightbulb">lightbulb</span>
+<p class="text-xs text-on-surface-variant font-medium">Suggestion: Reroute Gate 03 traffic to North Plaza via shuttle link 04.</p>
+</div>
+<button class="bg-primary text-white text-[10px] px-4 py-2 rounded-lg font-bold uppercase tracking-widest hover:opacity-90 transition-opacity">Deploy Alert</button>
+</div>
+</div>
+<!-- Secondary Trackers: Restrooms & Services -->
+<div class="md:col-span-4 space-y-8">
+<!-- Restroom Availability -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/40 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl">Amenities</h3>
+<span class="material-symbols-outlined text-stone-400 text-sm" data-icon="more_vert">more_vert</span>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-stone-500" data-icon="wc">wc</span>
+<div>
+<p class="text-xs font-bold uppercase">Sector A Restrooms</p>
+<p class="text-[10px] text-stone-400">Level 1 East</p>
+</div>
+</div>
+<div class="px-3 py-1 rounded-full text-[10px] font-bold bg-green-50 text-green-600 border border-green-100">VACANT</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-stone-500" data-icon="wc">wc</span>
+<div>
+<p class="text-xs font-bold uppercase">Sector B Restrooms</p>
+<p class="text-[10px] text-stone-400">Food Court South</p>
+</div>
+</div>
+<div class="px-3 py-1 rounded-full text-[10px] font-bold bg-tertiary/10 text-tertiary border border-tertiary/20">AT CAPACITY</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<span class="material-symbols-outlined text-stone-500" data-icon="wc">wc</span>
+<div>
+<p class="text-xs font-bold uppercase">Mezzanine Lounge</p>
+<p class="text-[10px] text-stone-400">Level 2 VIP Area</p>
+</div>
+</div>
+<div class="px-3 py-1 rounded-full text-[10px] font-bold bg-[#c2652a]/10 text-[#c2652a] border border-[#c2652a]/20">MODERATE</div>
+</div>
+</div>
+</div>
+<!-- Food Stall Congestion -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/40 shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl">Food &amp; Beverage</h3>
+<span class="material-symbols-outlined text-stone-400 text-sm" data-icon="restaurant">restaurant</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-variant/40 transition-colors cursor-pointer">
+<div>
+<p class="text-xs font-bold">Desert Rose Cafe</p>
+<p class="text-[10px] text-stone-400">Avg. wait 4 mins</p>
+</div>
+<div class="flex space-x-1">
+<div class="w-1.5 h-4 bg-green-500 rounded-full"></div>
+<div class="w-1.5 h-4 bg-stone-200 rounded-full"></div>
+<div class="w-1.5 h-4 bg-stone-200 rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-variant/40 transition-colors cursor-pointer">
+<div>
+<p class="text-xs font-bold">The Oasis Grill</p>
+<p class="text-[10px] text-stone-400">Avg. wait 18 mins</p>
+</div>
+<div class="flex space-x-1">
+<div class="w-1.5 h-4 bg-tertiary rounded-full"></div>
+<div class="w-1.5 h-4 bg-tertiary rounded-full"></div>
+<div class="w-1.5 h-4 bg-tertiary rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 rounded-lg hover:bg-surface-variant/40 transition-colors cursor-pointer">
+<div>
+<p class="text-xs font-bold">Sienna Juice Bar</p>
+<p class="text-[10px] text-stone-400">Avg. wait 10 mins</p>
+</div>
+<div class="flex space-x-1">
+<div class="w-1.5 h-4 bg-[#c2652a] rounded-full"></div>
+<div class="w-1.5 h-4 bg-[#c2652a] rounded-full"></div>
+<div class="w-1.5 h-4 bg-stone-200 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Venue Heatmap Section -->
+<div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/40 shadow-sm h-[400px] relative group">
+<img class="w-full h-full object-cover" data-alt="architectural blueprint of a large exhibition hall with glowing heatmap overlays showing crowd density in warm sienna and cool linen tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYvRoC3Ms6fIkmq3pjKOJcmuTdEQDOyyTk1LvtiBSAP3s9jN2P5idtyFjrkAZjHudIc_TQPK52ZjGIf5VQyy5ATsusrFUarWzXCg2DFa8gS2EZTge7lPA3jnPRnNtpW6fswWcKygtHQJVxoHGUSN7P1-6-P1t0Paj8LZdn0ksr-4P7bSFwEv8NczQ0ncrFon3EcqPwsSg3qloEFciIM39yIXJcQWGqqhWLUXJN3UgeyxB2GXUav2bRoRWUlZoyjIhw44K139xzZPg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+<div>
+<h3 class="text-white text-2xl mb-1">Venue Flow Heatmap</h3>
+<p class="text-white/70 text-xs font-body tracking-wide">Real-time occupancy density across the Exhibition Hall and Lounge Wings.</p>
+</div>
+</div>
+<div class="absolute top-6 left-6 flex space-x-2">
+<button class="bg-white/90 backdrop-blur px-3 py-1.5 rounded-lg text-[10px] font-bold flex items-center shadow-md">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="layers">layers</span> LAYERS
+                        </button>
+<button class="bg-white/90 backdrop-blur px-3 py-1.5 rounded-lg text-[10px] font-bold flex items-center shadow-md">
+<span class="material-symbols-outlined text-sm mr-2" data-icon="my_location">my_location</span> RE-CENTER
+                        </button>
+</div>
+</div>
+<div class="bg-[#c2652a] p-8 rounded-xl shadow-lg relative overflow-hidden flex flex-col justify-between">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-white/5 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<span class="text-white/60 text-[10px] uppercase tracking-widest font-bold">Predictive Model</span>
+<h3 class="text-white text-3xl mt-2 leading-tight">Congestion Forecast</h3>
+<p class="text-white/80 text-sm font-body mt-4 leading-relaxed">System predicts a 15% increase in Gate 02 traffic at 14:00 due to Workshop Session conclusion in Hall C.</p>
+</div>
+<div class="relative z-10 pt-10">
+<button class="w-full bg-white text-[#c2652a] font-bold text-xs py-4 rounded-lg uppercase tracking-widest hover:bg-surface-container-lowest transition-colors">Apply Dynamic Rerouting</button>
+<p class="text-white/40 text-[9px] text-center mt-4 uppercase tracking-[0.2em]">Validated by Core AI v2.4</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Component -->
+<footer class="md:pl-64 w-full bg-[#faf5ee] border-t border-[#d8d0c8]/60 py-6 px-10 flex flex-col md:flex-row justify-between items-center mt-auto">
+<p class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter">© 2024 Sahara Event Systems. Sun-Baked Simplicity.</p>
+<div class="flex space-x-8 mt-4 md:mt-0">
+<a class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] underline transition-opacity duration-300" href="#">Support</a>
+<a class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] underline transition-opacity duration-300" href="#">Privacy</a>
+<a class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] underline transition-opacity duration-300" href="#">System Status</a>
+</div>
+</footer>
+<!-- BottomNavBar for Mobile -->
+<nav class="md:hidden fixed bottom-0 w-full bg-[#faf5ee] border-t border-[#d8d0c8]/60 flex justify-around items-center h-16 z-50">
+<div class="flex flex-col items-center text-[#c2652a]">
+<span class="material-symbols-outlined text-2xl" data-icon="sensors">sensors</span>
+<span class="text-[9px] font-bold uppercase mt-1">Live Feed</span>
+</div>
+<div class="flex flex-col items-center text-stone-400">
+<span class="material-symbols-outlined text-2xl" data-icon="dashboard">dashboard</span>
+<span class="text-[9px] font-bold uppercase mt-1">Dash</span>
+</div>
+<div class="flex flex-col items-center text-stone-400">
+<span class="material-symbols-outlined text-2xl" data-icon="explore">explore</span>
+<span class="text-[9px] font-bold uppercase mt-1">Map</span>
+</div>
+<div class="flex flex-col items-center text-stone-400">
+<span class="material-symbols-outlined text-2xl" data-icon="account_circle">account_circle</span>
+<span class="text-[9px] font-bold uppercase mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

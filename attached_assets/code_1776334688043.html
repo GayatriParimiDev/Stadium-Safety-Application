@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sahara Event Core | Live Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#7a1a10",
+                    "surface-container-low": "#f6f0e8",
+                    "error-container": "#fce4e0",
+                    "outline": "#9a9088",
+                    "secondary": "#78706a",
+                    "surface": "#faf5ee",
+                    "on-surface-variant": "#605850",
+                    "surface-bright": "#faf5ee",
+                    "tertiary": "#8c3c3c",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#f0a878",
+                    "on-background": "#3a302a",
+                    "inverse-primary": "#f0a878",
+                    "tertiary-fixed-dim": "#e8a0a0",
+                    "on-secondary-fixed-variant": "#504840",
+                    "inverse-on-surface": "#faf5ee",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#d8d0c8",
+                    "surface-variant": "#ece6dc",
+                    "on-primary-container": "#fbe8d8",
+                    "surface-tint": "#c2652a",
+                    "on-tertiary-container": "#3a2020",
+                    "surface-container-highest": "#e6e0d6",
+                    "surface-container": "#f2ece4",
+                    "secondary-fixed": "#eae2da",
+                    "on-secondary-container": "#605850",
+                    "on-primary-fixed": "#401a08",
+                    "background": "#faf5ee",
+                    "on-tertiary-fixed": "#2e1515",
+                    "surface-container-high": "#ece6dc",
+                    "on-tertiary-fixed-variant": "#6e3030",
+                    "inverse-surface": "#3a302a",
+                    "secondary-fixed-dim": "#cec6be",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#eae2da",
+                    "primary-fixed": "#fbe8d8",
+                    "on-surface": "#3a302a",
+                    "surface-dim": "#dcd6cc",
+                    "on-secondary-fixed": "#2a2420",
+                    "tertiary-fixed": "#fce0e0",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#8a4518",
+                    "tertiary-container": "#d47070",
+                    "primary-container": "#e08850",
+                    "primary": "#c2652a",
+                    "error": "#c0392b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Eb Garamond"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf5ee;
+            font-family: 'Manrope', sans-serif;
+        }
+        .serif-text {
+            font-family: 'EB Garamond', serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 w-full z-50 bg-[#faf5ee]/80 dark:bg-stone-900/80 backdrop-blur-md border-b border-[#d8d0c8]/60 dark:border-stone-700/40 shadow-[0_2px_16px_rgba(58,48,42,0.04)] flex justify-between items-center w-full px-8 h-20">
+<div class="flex items-center gap-8">
+<h1 class="text-2xl font-serif italic text-[#c2652a] dark:text-[#c2652a]">Sahara Event Core</h1>
+<nav class="hidden md:flex gap-6">
+<a class="font-label text-sm uppercase tracking-widest text-stone-500 hover:text-[#c2652a] transition-colors duration-300 cursor-pointer active:opacity-70" href="#">Dashboard</a>
+<a class="font-label text-sm uppercase tracking-widest text-[#c2652a] border-b-2 border-[#c2652a] pb-1 cursor-pointer active:opacity-70" href="#">Notifications</a>
+<a class="font-label text-sm uppercase tracking-widest text-stone-500 hover:text-[#c2652a] transition-colors duration-300 cursor-pointer active:opacity-70" href="#">Venue Map</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-stone-500 cursor-pointer hover:text-[#c2652a] transition-colors duration-300">notifications</span>
+<span class="material-symbols-outlined text-stone-500 cursor-pointer hover:text-[#c2652a] transition-colors duration-300">map</span>
+<span class="material-symbols-outlined text-stone-500 cursor-pointer hover:text-[#c2652a] transition-colors duration-300">account_circle</span>
+</div>
+</header>
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Sidebar Shell (Hidden on small) -->
+<aside class="hidden lg:flex lg:col-span-3 flex-col py-10 h-fit bg-[#faf5ee] border-r border-[#d8d0c8]/60">
+<div class="mb-10">
+<h2 class="font-serif text-3xl text-[#c2652a]">Sahara</h2>
+<p class="font-body text-xs uppercase tracking-[0.2em] text-stone-400 mt-1">Venue Intelligence</p>
+</div>
+<ul class="space-y-4">
+<li><a class="flex items-center gap-3 font-label text-sm uppercase tracking-widest text-stone-400 pl-5 hover:bg-[#c2652a]/5 hover:text-[#c2652a] transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard</a></li>
+<li><a class="flex items-center gap-3 font-label text-sm uppercase tracking-widest text-stone-400 pl-5 hover:bg-[#c2652a]/5 hover:text-[#c2652a] transition-all duration-200" href="#">
+<span class="material-symbols-outlined">explore</span> Venue Map</a></li>
+<li><a class="flex items-center gap-3 font-label text-sm uppercase tracking-widest text-[#c2652a] font-bold border-l-4 border-[#c2652a] pl-4" href="#">
+<span class="material-symbols-outlined">sensors</span> Live Feed</a></li>
+<li><a class="flex items-center gap-3 font-label text-sm uppercase tracking-widest text-stone-400 pl-5 hover:bg-[#c2652a]/5 hover:text-[#c2652a] transition-all duration-200" href="#">
+<span class="material-symbols-outlined">room_service</span> Concierge</a></li>
+<li><a class="flex items-center gap-3 font-label text-sm uppercase tracking-widest text-stone-400 pl-5 hover:bg-[#c2652a]/5 hover:text-[#c2652a] transition-all duration-200" href="#">
+<span class="material-symbols-outlined">leaderboard</span> Analytics</a></li>
+</ul>
+</aside>
+<!-- Main Content Canvas -->
+<div class="lg:col-span-9">
+<div class="mb-12">
+<h2 class="serif-text text-5xl text-on-surface leading-tight tracking-tight">Real-time Activity</h2>
+<p class="font-body text-secondary mt-2 max-w-xl">Intelligent alerts and crowd management insights. Stay connected to every pulse of the venue.</p>
+</div>
+<!-- Bento Layout for Notifications -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Priority High: Emergency Alert -->
+<div class="md:col-span-2 bg-error-container/40 border border-error/20 p-8 rounded-xl shadow-[0_2px_16px_rgba(58,48,42,0.04)] flex gap-6 items-start">
+<div class="bg-error text-on-error p-3 rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">emergency_home</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label text-xs font-bold uppercase tracking-widest text-error">Critical Priority</span>
+<span class="font-body text-xs text-on-error-container/60">2 minutes ago</span>
+</div>
+<h3 class="serif-text text-2xl text-on-error-container mb-2">Technical Update: North Entrance Reroute</h3>
+<p class="font-body text-on-error-container/80 text-sm leading-relaxed max-w-2xl">
+                            Due to high crowd density at the North Plaza, all arrivals are temporarily being diverted to the East Wing Gate. Staff are stationed to assist.
+                        </p>
+<button class="mt-4 bg-error text-on-error px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest hover:opacity-90 transition-opacity">
+                            View Route Map
+                        </button>
+</div>
+</div>
+<!-- High Priority: Event Highlight -->
+<div class="bg-surface-container-lowest border border-outline-variant p-8 rounded-xl shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex justify-between mb-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-label text-xs font-bold uppercase tracking-widest">High Priority</span>
+</div>
+<span class="font-body text-xs text-secondary">15 mins ago</span>
+</div>
+<h3 class="serif-text text-2xl text-on-surface mb-3">Keynote Spotlight: Sahara Design</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                        The "Sun-Baked Simplicity" keynote is starting in the Atrium Gallery. Limited seating available.
+                    </p>
+<div class="mt-6 overflow-hidden rounded-lg h-32 w-full bg-stone-200">
+<img class="w-full h-full object-cover" data-alt="minimalist architectural interior with golden hour sunlight hitting warm textured walls and empty seating" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNXRGasxTAsZrDCbOF_6KMTOA8wxncMqGy3q8F02Z74_en-Jtd2-4kzpyiZx8Rv0EiEMpLGKIZLxhZRNgW8YUhGAFFZBI-pXg5J4_YGCOJNka16xIDgWBM9EGJwxgmXPduYDuVnRWNyPWfZYumB4bFoCCIkO208Fll0YOCGSrOHZC3GP4Y2gEZhff1szvzyklc8rgo2dU1dxHYCgFkrxzbtGUJn_RU9qb67RhDzoP3ukzsXNZIy8i0xBLG0H4u4mNT6D_mrGZQD7k"/>
+</div>
+</div>
+<!-- Medium Priority: Crowd Alert -->
+<div class="bg-surface-container-high/50 border border-outline-variant p-8 rounded-xl shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex justify-between mb-4">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label text-xs font-bold uppercase tracking-widest">Medium Priority</span>
+</div>
+<span class="font-body text-xs text-secondary">32 mins ago</span>
+</div>
+<h3 class="serif-text text-2xl text-on-surface mb-3">Lounge Capacity Alert</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed mb-4">
+                        The Terrace Lounge has reached 85% capacity. We recommend the Oasis Courtyard for a quieter networking environment.
+                    </p>
+<div class="bg-surface-container-low rounded-lg p-4 flex justify-between items-center">
+<span class="font-body text-xs uppercase tracking-tighter text-secondary">Status: Dynamic Flow</span>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-primary border-2 border-surface-container-low"></div>
+<div class="w-6 h-6 rounded-full bg-tertiary border-2 border-surface-container-low"></div>
+<div class="w-6 h-6 rounded-full bg-stone-300 border-2 border-surface-container-low"></div>
+</div>
+</div>
+</div>
+<!-- Low Priority: Concierge Update -->
+<div class="bg-surface-container-lowest border border-outline-variant p-8 rounded-xl shadow-[0_2px_16px_rgba(58,48,42,0.04)] flex flex-col justify-between">
+<div>
+<div class="flex justify-between mb-4">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined">info</span>
+<span class="font-label text-xs font-bold uppercase tracking-widest">Low Priority</span>
+</div>
+<span class="font-body text-xs text-secondary">1 hour ago</span>
+</div>
+<h3 class="serif-text text-xl text-on-surface mb-3">Complimentary Refreshments</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                            Artisanal herbal infusions and warm linen towels are now available at all hospitality hubs.
+                        </p>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/30 flex items-center justify-between">
+<span class="text-primary font-label text-xs font-bold uppercase tracking-widest cursor-pointer hover:underline">Dismiss</span>
+<span class="text-stone-400 font-label text-xs font-bold uppercase tracking-widest cursor-pointer hover:text-primary transition-colors">Mark as Read</span>
+</div>
+</div>
+<!-- Low Priority: Interactive Map Ping -->
+<div class="bg-surface-container-lowest border border-outline-variant p-8 rounded-xl shadow-[0_2px_16px_rgba(58,48,42,0.04)]">
+<div class="flex justify-between mb-4">
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined">location_on</span>
+<span class="font-label text-xs font-bold uppercase tracking-widest">Low Priority</span>
+</div>
+<span class="font-body text-xs text-secondary">2 hours ago</span>
+</div>
+<h3 class="serif-text text-xl text-on-surface mb-3">New Venue Discovery</h3>
+<p class="font-body text-sm text-on-surface-variant mb-6">
+                        A new networking "Quiet Zone" has been unlocked in the South Wing.
+                    </p>
+<div class="relative w-full h-40 rounded-lg overflow-hidden grayscale contrast-125 opacity-70">
+<img class="w-full h-full object-cover" data-alt="architectural blueprint of a minimalist building with clean lines and geometric shapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNvQ7JhLXPN6CF0iIPrNAD9gE6YYHaZJDrW9Dzc3j-FSOpe8Ffds-HEHSdOeNhzTPJid0JnLewrooaYMKg6U8x8Keevy2Fcv09QWc50Nk1rJsg9M2xNWxaRqiwGRkpjuNOASOP8PHvZ-KC-TXQAXptwAbegLUWDjgn-n27s8ceHW-ClDUNQflhGHwnOkskv3pDGVMacpdumPNn9bv8xj5ZPbtA9pBDs0UQFkpdWN-p3LoyZYSZg_lOpydSvn71T61P6rhFAvSxs3k"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-8 h-8 bg-primary rounded-full animate-pulse flex items-center justify-center">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full border-t border-[#d8d0c8]/60 dark:border-stone-800 bg-[#faf5ee] dark:bg-stone-950 flex justify-between items-center px-10 py-6 w-full mt-auto">
+<p class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter">© 2024 Sahara Event Systems. Sun-Baked Simplicity.</p>
+<div class="flex gap-8">
+<a class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] underline transition-opacity duration-300" href="#">Support</a>
+<a class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] underline transition-opacity duration-300" href="#">Privacy</a>
+<a class="font-['Manrope'] text-xs text-stone-400 uppercase tracking-tighter hover:text-[#8c3c3c] underline transition-opacity duration-300" href="#">System Status</a>
+</div>
+</footer>
+<!-- Mobile Navigation Shell -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-[#faf5ee] border-t border-[#d8d0c8]/60 h-16 flex justify-around items-center px-4 z-50">
+<span class="material-symbols-outlined text-stone-400">dashboard</span>
+<span class="material-symbols-outlined text-[#c2652a]" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="material-symbols-outlined text-stone-400">explore</span>
+<span class="material-symbols-outlined text-stone-400">account_circle</span>
+</nav>
+</body></html>

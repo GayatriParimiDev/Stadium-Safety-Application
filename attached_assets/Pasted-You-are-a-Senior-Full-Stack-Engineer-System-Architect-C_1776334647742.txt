@@ -1,0 +1,162 @@
+You are a Senior Full Stack Engineer + System Architect.
+
+Convert an existing Figma/Stitch-designed UI into a fully functional, production-ready web application called:
+
+Smart Event Experience Platform
+
+This platform enhances attendee experience at large-scale sporting venues by solving:
+
+Crowd movement optimization
+Waiting time reduction
+Real-time coordination
+Smart navigation
+
+⚠️ IMPORTANT:
+
+Strictly preserve the UI/UX design, layout, colors, and interactions from Stitch
+Do NOT redesign. Only implement with precision.
+🏗️ TECH STACK REQUIREMENTS
+Frontend
+Next.js (App Router)
+TypeScript (strict mode)
+Tailwind CSS (match UI exactly)
+Zustand / Redux Toolkit (state management)
+Framer Motion (for animations)
+Backend
+Node.js with Express OR Next.js API routes
+REST + optional WebSocket support for real-time updates
+Database
+MongoDB (preferred) OR PostgreSQL
+Use Prisma ORM
+🔥 CORE FEATURES TO IMPLEMENT
+1. 🏟️ Dashboard (Real-Time)
+Live event status (mock or API)
+Crowd density preview (simulated + dynamic updates)
+Quick actions:
+Navigate to seat
+Order food
+Find exits
+2. 🗺️ Smart Navigation System
+Integrate Google Maps API
+Overlay simulated crowd heatmaps
+Pathfinding logic:
+Shortest path
+Least crowded path
+Use user geolocation
+3. 🍔 Smart Food Ordering
+Vendor listing system
+Dynamic wait time calculation
+Order placement system
+Queue prediction logic (mock AI logic acceptable)
+4. 🚦 Crowd & Queue System
+Real-time queue indicators
+Color-coded congestion system:
+Green / Yellow / Red
+Simulated real-time updates using WebSockets or polling
+5. 📢 Notifications System
+Real-time alerts (WebSockets or Firebase)
+Priority-based notification system
+6. 👤 User System
+Authentication (JWT or Firebase Auth)
+Profile management
+Preferences storage
+🧪 HACKATHON EVALUATION OPTIMIZATION
+✅ 1. Code Quality
+Clean architecture (feature-based folder structure)
+Reusable components
+Proper TypeScript types everywhere
+ESLint + Prettier configured
+Avoid code duplication
+🔐 2. Security
+Input validation (Zod / Joi)
+Sanitize all inputs
+Rate limiting (API routes)
+Secure authentication (JWT/Firebase)
+Protect API routes (middleware)
+Environment variables for secrets
+⚡ 3. Efficiency
+Lazy loading components
+Image optimization (Next.js Image)
+API caching where needed
+Debounced inputs for search/maps
+Optimize re-renders
+🧪 4. Testing
+Unit tests (Jest / Vitest)
+Component tests (React Testing Library)
+At least:
+Navigation logic test
+API route test
+One UI component test
+♿ 5. Accessibility
+Follow WCAG guidelines
+Proper semantic HTML
+ARIA labels
+Keyboard navigation support
+High contrast UI support
+☁️ 6. Google Services Integration (IMPORTANT)
+Google Maps API (navigation + map UI)
+Firebase:
+Authentication
+Real-time database OR Firestore (for live updates)
+Cloud Messaging (notifications)
+Optional:
+Google Analytics (event tracking)
+📁 PROJECT STRUCTURE (MANDATORY)
+/app
+/components
+/features
+  /navigation
+  /crowd
+  /orders
+  /notifications
+/lib
+/hooks
+/services
+/api
+/prisma
+/tests
+/utils
+🔄 REAL-TIME SYSTEM DESIGN
+Use WebSockets OR Firebase real-time updates
+Simulate:
+Crowd density changes
+Queue updates
+Notifications
+🎨 UI IMPLEMENTATION RULES
+Pixel-perfect match with Stitch design
+Maintain:
+Colors
+Typography
+Spacing
+Animations
+Use reusable UI components
+🚀 DEPLOYMENT READY
+Add environment config (.env.example)
+Make it deployable on:
+Vercel OR Replit
+Include setup instructions
+📌 BONUS (FOR TOP 100 EDGE)
+Add AI-based suggestion logic:
+“Best time to buy food”
+“Least crowded exit”
+Add dark/light mode toggle
+Add offline fallback (basic)
+🧾 OUTPUT EXPECTATIONS
+
+Generate:
+
+Complete working codebase
+API routes
+Database schema (Prisma)
+Setup instructions
+Test cases
+Deployment steps
+⚠️ FINAL INSTRUCTION
+
+This is a hackathon-grade, evaluation-focused system.
+Prioritize:
+
+Performance
+Clean code
+Real-time capabilities
+Scalability mindset

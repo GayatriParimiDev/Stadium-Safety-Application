@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Sahara Event Core"
+version = "1.0.0"
+id = "artifacts/sahara-event-core"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25430
+
+[services.development]
+run = "pnpm --filter @workspace/sahara-event-core run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/sahara-event-core", "run", "build" ]
+publicDir = "artifacts/sahara-event-core/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25430"
+BASE_PATH = "/"
