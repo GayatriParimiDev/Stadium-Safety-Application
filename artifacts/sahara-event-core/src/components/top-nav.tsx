@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export function TopNav() {
   const [location] = useLocation();
+  const [isMuted, setIsMuted] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    // Attempt to auto-play on mount
+    if (audioRef.current && !isMuted) {
+      audioRef.current.play().catch((e: any) => {
+        console.warn("Autoplay was blocked by browser. User needs to interact first.", e);
+        // If blocked, we might want to visually show it's muted or paused
+        setIsMuted(true);
+      });
+    }
+  }, []);
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      if (isMuted) {
+        audioRef.current.play().catch((e: any) => console.error("Play failed:", e));
+      } else {
+        audioRef.current.pause();
+      }
+    }
+    setIsMuted(!isMuted);
+  };
 
   return (
     <header className="w-full h-16 bg-background/80 backdrop-blur-md border-b border-border flex items-center px-6 sticky top-0 z-50">
@@ -28,6 +52,15 @@ export function TopNav() {
           <span className="material-symbols-outlined">notifications</span>
           <span className="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full" />
         </Link>
+        <button 
+          onClick={toggleMute} 
+          className="text-muted-foreground hover:text-foreground cursor-pointer flex items-center justify-center p-1 rounded-full hover:bg-white/5 transition-colors"
+          title={isMuted ? "Unmute Stadium Audio" : "Mute Stadium Audio"}
+        >
+          <span className="material-symbols-outlined">
+            {isMuted ? 'volume_off' : 'volume_up'}
+          </span>
+        </button>
         <Link href="/live-feed" className="text-muted-foreground hover:text-foreground cursor-pointer">
           <span className="material-symbols-outlined">map</span>
         </Link>
@@ -37,6 +70,13 @@ export function TopNav() {
           </Avatar>
         </Link>
       </div>
+      <audio 
+        ref={audioRef}
+        src="/ipl_stadium_song.mp3" 
+        loop 
+        autoPlay 
+        muted={isMuted} 
+      />
     </header>
   );
 }
